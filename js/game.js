@@ -162,7 +162,7 @@ const game = {
   // Update hangman image based on wrong guesses
   updateHangmanImage: function () {
     const imgIndex = Math.min(this.wrongGuesses, this.maxGuesses);
-    this.elements.hangmanImg.src = "../images/hangman-" + imgIndex + ".svg";
+    this.elements.hangmanImg.src = "images/hangman-" + imgIndex + ".svg";
   },
 
   // Show result modal (win or lose)
@@ -174,12 +174,12 @@ const game = {
     const playBtn = document.getElementById("modalPlayAgain");
 
     if (type === "win") {
-      gif.src = "../images/victory.gif";
+      gif.src = "images/victory.gif";
       titleEl.textContent = "You Won!";
       titleEl.className = "modal-title win";
       msgEl.textContent = 'The word was "' + this.currentWord.toUpperCase() + '".';
     } else {
-      gif.src = "../images/lost.gif";
+      gif.src = "images/lost.gif";
       titleEl.textContent = "You Lost!";
       titleEl.className = "modal-title lose";
       msgEl.textContent = 'The word was "' + this.currentWord.toUpperCase() + '".';
