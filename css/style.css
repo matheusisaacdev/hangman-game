@@ -1,0 +1,332 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap");
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Baloo 2", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: radial-gradient(circle at top, #1e293b 0, #0f172a 55%);
+  color: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+}
+
+.site-header {
+  text-align: center;
+  padding: 1.5rem 1rem 0.5rem;
+}
+.site-header h1 {
+  margin: 0;
+  font-size: 2.4rem;
+  color: #ffb703;
+  text-shadow: 0 4px 0 rgba(0, 0, 0, 0.4);
+}
+.site-header .subtitle {
+  margin: 0.25rem 0 0;
+  color: #9ca3af;
+  font-size: 0.95rem;
+}
+
+.game-layout {
+  width: 100%;
+  padding: 1.5rem 1rem 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+}
+
+.game-card {
+  background: #1d2438;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  border: 3px solid #ffb703;
+  max-width: 900px;
+  width: 100%;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.hangman-panel {
+  flex: 1 1 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+}
+
+.hangman-img {
+  width: 100%;
+  max-width: 260px;
+}
+
+.info-panel {
+  flex: 1 1 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.hint-box,
+.word-box,
+.status-box {
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+.hint-box h2,
+.word-box h2,
+.status-box h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.1rem;
+  color: #fb7185;
+}
+.hint-box p,
+.word-box p,
+.status-box p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #f9fafb;
+}
+
+.word-display {
+  font-size: 1.8rem;
+  letter-spacing: 0.25rem;
+  text-align: center;
+  margin-top: 0.25rem;
+}
+
+.status-box {
+  font-size: 0.9rem;
+}
+.status-box span {
+  font-weight: 600;
+}
+
+.message {
+  min-height: 1.4rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+}
+.message.error {
+  color: #f97373;
+}
+.message.success {
+  color: #4ade80;
+}
+
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  min-width: 320px;
+}
+
+.kb-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: nowrap;
+}
+
+.kb-key {
+  width: 36px;
+  height: 36px;
+  border-radius: 7px;
+  border: 2px solid rgba(148, 163, 184, 0.35);
+  background: rgba(255, 255, 255, 0.08);
+  color: #f9fafb;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease, opacity 0.2s ease;
+}
+.kb-key:hover:not(:disabled) {
+  background: rgba(255, 183, 3, 0.18);
+  border-color: #ffb703;
+  transform: translateY(-2px);
+}
+.kb-key:active:not(:disabled) {
+  transform: translateY(1px);
+}
+.kb-key.correct {
+  background: rgba(74, 222, 128, 0.25);
+  border-color: #4ade80;
+  color: #4ade80;
+  opacity: 1;
+}
+.kb-key.wrong {
+  background: rgba(249, 115, 115, 0.15);
+  border-color: #f97373;
+  color: #f97373;
+  opacity: 0.6;
+}
+.kb-key:disabled {
+  cursor: not-allowed;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-4px);
+  }
+  60% {
+    transform: translateX(4px);
+  }
+  80% {
+    transform: translateX(-2px);
+  }
+}
+.kb-key.shake {
+  animation: shake 0.35s ease;
+}
+
+.play-again-btn {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border-radius: 999px;
+  border: none;
+  background: #0ea5e9;
+  color: #0b1120;
+  font-family: "Baloo 2", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.4);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.15s ease;
+}
+.play-again-btn:hover:not(:disabled) {
+  filter: brightness(1.05);
+}
+.play-again-btn:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.5);
+}
+.play-again-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-card {
+  background: #1d2438;
+  border-radius: 22px;
+  border: 2px solid rgba(255, 183, 3, 0.35);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+  padding: 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  max-width: 360px;
+  width: 90%;
+  text-align: center;
+  transform: scale(0.85) translateY(20px);
+  transition: transform 0.35s ease-out;
+}
+
+.modal-overlay.active .modal-card {
+  transform: scale(1) translateY(0);
+}
+
+.modal-gif {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.9rem;
+}
+.modal-title.win {
+  color: #4ade80;
+  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.4);
+}
+.modal-title.lose {
+  color: #f97373;
+  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.4);
+}
+
+.modal-msg {
+  margin: 0;
+  font-size: 1rem;
+  color: #9ca3af;
+}
+
+.site-footer {
+  padding: 0.75rem 1rem 1.25rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+@media (max-width: 720px) {
+  .game-card {
+    padding: 1.25rem;
+  }
+  .word-display {
+    font-size: 1.5rem;
+    letter-spacing: 0.18rem;
+  }
+  .kb-key {
+    width: 30px;
+    height: 30px;
+    font-size: 0.78rem;
+  }
+}
+@media (max-width: 400px) {
+  .kb-key {
+    width: 26px;
+    height: 26px;
+    font-size: 0.7rem;
+    border-radius: 5px;
+  }
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hangman Game | Final Project</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../css/style.css">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png">
+  <link rel="icon" type="image/x-icon" href="../favicon/favicon.ico">
+  <link rel="manifest" href="../favicon/site.webmanifest">
+
+  <script src="../js/game.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <h1>Hangman Adventure</h1>
+    <p class="subtitle">Guess the word before the character is gone!</p>
+  </header>
+
+  <main class="game-layout">
+    <section class="game-card">
+      <div class="hangman-panel">
+        <img id="hangmanImg" src="../images/hangman-0.svg" alt="Hangman drawing" class="hangman-img">
+      </div>
+
+      <div class="info-panel">
+        <div class="hint-box">
+          <h2>Hint</h2>
+          <p id="hintText">Loading hint...</p>
+        </div>
+
+        <div class="word-box">
+          <h2>Word</h2>
+          <div id="wordDisplay" class="word-display">_ _ _ _</div>
+        </div>
+
+        <div class="status-box">
+          <p>Wrong guesses: <span id="wrongCount">0</span> / <span id="maxGuesses">6</span></p>
+        </div>
+
+        <div id="message" class="message"></div>
+
+        <div id="keyboard" class="keyboard" role="group" aria-label="Virtual keyboard"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Matheus Isaac — COMP2132 Final Project</p>
+  </footer>
+
+  <div id="resultModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <img id="modalGif" src="../images/victory.gif" alt="Result animation" class="modal-gif">
+      <h2 id="modalTitle" class="modal-title" aria-live="polite"></h2>
+      <p id="modalMsg" class="modal-msg"></p>
+      <button id="modalPlayAgain" class="play-again-btn">Play Again</button>
+    </div>
+  </div>
+
+</body>
+</html>

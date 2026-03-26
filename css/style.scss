@@ -1,0 +1,319 @@
+// Google Font
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap");
+
+// Colors
+$bg: #0f172a;
+$card: #1d2438;
+$accent: #ffb703;
+$accent-2: #fb7185;
+$text: #f9fafb;
+$muted: #9ca3af;
+$error: #f97373;
+$success: #4ade80;
+
+// Mixin
+@mixin flex-center($direction: row, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: center;
+  align-items: center;
+  gap: $gap;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Baloo 2", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: radial-gradient(circle at top, #1e293b 0, $bg 55%);
+  color: $text;
+  @include flex-center(column, 0);
+}
+
+.site-header {
+  text-align: center;
+  padding: 1.5rem 1rem 0.5rem;
+
+  h1 {
+    margin: 0;
+    font-size: 2.4rem;
+    color: $accent;
+    text-shadow: 0 4px 0 rgba(0, 0, 0, 0.4);
+  }
+
+  .subtitle {
+    margin: 0.25rem 0 0;
+    color: $muted;
+    font-size: 0.95rem;
+  }
+}
+
+.game-layout {
+  width: 100%;
+  padding: 1.5rem 1rem 2rem;
+  @include flex-center(row);
+}
+
+.game-card {
+  background: $card;
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  border: 3px solid $accent;
+  max-width: 900px;
+  width: 100%;
+  padding: 1.5rem;
+  @include flex-center(row, 1.5rem);
+  flex-wrap: wrap;
+}
+
+.hangman-panel {
+  flex: 1 1 260px;
+  @include flex-center(column);
+}
+
+// Hangman image - JS adds .visible to fade it in
+.hangman-img {
+  width: 100%;
+  max-width: 260px;
+}
+
+.info-panel {
+  flex: 1 1 320px;
+  @include flex-center(column, 1rem);
+  align-items: stretch;
+}
+
+.hint-box,
+.word-box,
+.status-box {
+  background: rgba(15, 23, 42, 0.9);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+
+  h2 {
+    margin: 0 0 0.25rem;
+    font-size: 1.1rem;
+    color: $accent-2;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: $text;
+  }
+}
+
+.word-display {
+  font-size: 1.8rem;
+  letter-spacing: 0.25rem;
+  text-align: center;
+  margin-top: 0.25rem;
+}
+
+.status-box {
+  font-size: 0.9rem;
+
+  span {
+    font-weight: 600;
+  }
+}
+
+.message {
+  min-height: 1.4rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: center;
+
+  &.error { color: $error; }
+  &.success { color: $success; }
+}
+
+// Virtual QWERTY Keyboard
+.keyboard {
+  @include flex-center(column, 6px);
+  width: 100%;
+  min-width: 320px;
+}
+
+.kb-row {
+  @include flex-center(row, 5px);
+  flex-wrap: nowrap;
+}
+
+.kb-key {
+  width: 36px;
+  height: 36px;
+  border-radius: 7px;
+  border: 2px solid rgba(148, 163, 184, 0.35);
+  background: rgba(255, 255, 255, 0.08);
+  color: $text;
+  font-family: "Baloo 2", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease,
+              transform 0.1s ease, opacity 0.2s ease;
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 183, 3, 0.18);
+    border-color: $accent;
+    transform: translateY(-2px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+
+  &.correct {
+    background: rgba(74, 222, 128, 0.25);
+    border-color: $success;
+    color: $success;
+    opacity: 1;
+  }
+
+  &.wrong {
+    background: rgba(249, 115, 115, 0.15);
+    border-color: $error;
+    color: $error;
+    opacity: 0.6;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-4px); }
+  60%       { transform: translateX(4px); }
+  80%       { transform: translateX(-2px); }
+}
+
+.kb-key.shake {
+  animation: shake 0.35s ease;
+}
+
+.play-again-btn {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border-radius: 999px;
+  border: none;
+  background: #0ea5e9;
+  color: #0b1120;
+  font-family: "Baloo 2", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.4);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.15s ease;
+
+  &:hover:not(:disabled) {
+    filter: brightness(1.05);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(2px);
+    box-shadow: 0 3px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
+
+// Result modal
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  @include flex-center(column, 0);
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+
+  &.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.modal-card {
+  background: $card;
+  border-radius: 22px;
+  border: 2px solid rgba(255, 183, 3, 0.35);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+  padding: 2rem 2.5rem;
+  @include flex-center(column, 1rem);
+  max-width: 360px;
+  width: 90%;
+  text-align: center;
+  transform: scale(0.85) translateY(20px);
+  transition: transform 0.35s ease-out;
+}
+
+.modal-overlay.active .modal-card {
+  transform: scale(1) translateY(0);
+}
+
+.modal-gif {
+  width: 180px;
+  height: 180px;  
+  object-fit: contain;  
+}
+
+.modal-title {
+  margin: 0;
+  font-size: 1.9rem;
+
+  &.win { color: $success; text-shadow: 0 3px 0 rgba(0, 0, 0, 0.4); }
+  &.lose { color: $error; text-shadow: 0 3px 0 rgba(0, 0, 0, 0.4); }
+}
+
+.modal-msg {
+  margin: 0;
+  font-size: 1rem;
+  color: $muted;
+}
+
+.site-footer {
+  padding: 0.75rem 1rem 1.25rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: $muted;
+}
+
+@media (max-width: 720px) {
+  .game-card {
+    padding: 1.25rem;
+  }
+
+  .word-display {
+    font-size: 1.5rem;
+    letter-spacing: 0.18rem;
+  }
+
+  .kb-key {
+    width: 30px;
+    height: 30px;
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .kb-key {
+    width: 26px;
+    height: 26px;
+    font-size: 0.7rem;
+    border-radius: 5px;
+  }
+}
