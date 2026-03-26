@@ -1,7 +1,7 @@
 // Final Project - Hangman Game
 // Matheus Isaac - COMP2132
 
-const dataUrl = "../data/words.json";
+const dataUrl = "data/words.json";
 
 const game = {
   words: [],
